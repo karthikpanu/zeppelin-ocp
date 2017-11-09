@@ -1,7 +1,5 @@
 FROM centos:latest
 
-MAINTAINER Andrew Block <andy.block@gmail.com>
-
 ENV HOME=/opt/zeppelin \
     MAVEN_VERSION=3.3.9 \
     JAVA_HOME=/usr/lib/jvm/java \
@@ -27,14 +25,14 @@ RUN yum clean all && \
     chown -R 1001:0 $HOME/server $HOME/bin $HOME/storage && \
     chmod -R "g+rwX" $HOME/server $HOME/bin $HOME/storage
     
-ADD bin/start.sh /$HOME/bin/
+ADD bin/start.sh $HOME/bin/
 
-RUN chmod +x /$HOME/bin/start.sh
+RUN chmod +x $HOME/bin/start.sh
 
 EXPOSE 8080
 
-WORKDIR /opt/zeppelin
+WORKDIR $HOME
 
 VOLUME /opt/zeppelin/storage
 
-ENTRYPOINT ["/$HOME/bin/start.sh"]
+ENTRYPOINT ["/opt/zeppelin/bin/start.sh"]
