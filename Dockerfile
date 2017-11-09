@@ -29,6 +29,8 @@ RUN yum clean all && \
     
 ADD bin/start.sh /$HOME/bin/
 
+RUN chmod +x /$HOME/bin/start.sh
+
 EXPOSE 8080
 
 WORKDIR /opt/zeppelin
