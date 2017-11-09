@@ -1,0 +1,73 @@
+kind: Template
+apiVersion: v1
+template: zeppelin-ocp
+metadata:
+  name: zeppelin-ocp
+objects:
+
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: zeppelin-ocp-web
+    labels:
+      name: zeppelin-ocp
+  spec:
+    ports:
+      - name: zeppelin-ocp-web
+        protocol: TCP
+        port: 8080
+        targetPort: 8080
+    selector:
+      name: zeppelin-ocp
+
+- kind: DeploymentConfig
+  apiVersion: v1
+  metadata:
+    name: zeppelin-ocp
+    labels:
+      name: zeppelin-ocp
+  spec:
+    strategy:
+      type: Rolling
+    triggers:
+      - type: ConfigChange
+    replicas: 1
+    selector:
+      name: zeppelin-ocp
+    template:
+      metadata:
+        labels:
+          name: zeppelin-ocp
+      spec:
+        containers:
+          - name: zeppelin-ocp
+            image: karthikpanu/zeppelin-ocp
+            ports:
+              - name: zeppelin-ocp-web
+                protocol: TCP
+                containerPort: 8080
+            env:
+              - name: SPARK_MASTER_ADDRESS
+                value: spark://${SPARK_CLUSTER_NAME}:7077
+              - name: SPARK_IMAGE
+                value: ${SPARK_CLUSTER_IMAGE}
+
+- kind: Route
+  apiVersion: v1
+  metadata:
+    name: zeppelin-ocp-web
+    labels:
+      name: zeppelin-ocp
+  spec:
+    host:
+    to:
+      kind: Service
+      name: zeppelin-ocp-web
+
+parameters:
+- name: SPARK_CLUSTER_NAME
+  description: Name of spark cluster to run against
+  required: true
+- name: SPARK_CLUSTER_IMAGE
+  description: Full name of the spark image to use when creating clusters
+  value: radanalyticsio/openshift-spark
