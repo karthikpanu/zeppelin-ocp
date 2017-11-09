@@ -35,4 +35,6 @@ WORKDIR $HOME
 
 VOLUME /opt/zeppelin/storage
 
+USER root
+
 ENTRYPOINT ["/opt/zeppelin/bin/start.sh"]
