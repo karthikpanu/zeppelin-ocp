@@ -9,7 +9,8 @@ ENV HOME=/opt/zeppelin \
     ZEPPELIN_CONF_DIR=/opt/zeppelin/storage/conf \
     ZEPPELIN_LOG_DIR=/opt/zeppelin/storage/logs \
     ZEPPELIN_NOTEBOOK_DIR=/opt/zeppelin/storage/notebook \
-    ZEPPELIN_INTERPRETER_DIR=/opt/zeppelin/storage/interpreter
+    ZEPPELIN_INTERPRETER_DIR=/opt/zeppelin/storage/interpreter \
+    ZEPPELIN_WAR_TEMPDIR=/opt/zeppelin/storage/webapps
 
 
 RUN yum clean all && \

@@ -18,9 +18,13 @@ if [ ! -d "$ZEPPELIN_CONF_DIR" ] && [ ! -d "$ZEPPELIN_NOTEBOOK_DIR" ] && [ ! -d 
     
     echo "Installing postgresql interpreter..."
     
+    echo "Coping webapps directory"
+    cp -R ${ZEPPELIN_SERVER_HOME}/webapps/* ${ZEPPELIN_WAR_TEMPDIR}
+
     # Install Postgresql Interpreter
     ${ZEPPELIN_SERVER_HOME}/bin/install-interpreter.sh --name postgresql
     
+
 fi
 
 # Start Zeppelin Server
