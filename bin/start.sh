@@ -3,7 +3,7 @@
 
 # Check if server previously configured
 
-if [ ! -d "$ZEPPELIN_CONF_DIR" ] && [ ! -d "$ZEPPELIN_NOTEBOOK_DIR" ] && [ ! -d "$ZEPPELIN_LOG_DIR" ]  && [ ! -d "$ZEPPELIN_INTERPRETER_DIR" ]; then
+if [ ! -d "$ZEPPELIN_CONF_DIR" ] && [ ! -d "$ZEPPELIN_NOTEBOOK_DIR" ] && [ ! -d "$ZEPPELIN_LOG_DIR" ]  && [ ! -d "$ZEPPELIN_INTERPRETER_DIR" ] && [! -d "$ZEPPELIN_WAR_TEMPDIR" ]; then
     
     echo "Storage directories do not exist. Creating..."
     
