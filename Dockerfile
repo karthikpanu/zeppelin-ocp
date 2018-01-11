@@ -3,7 +3,7 @@ FROM centos:latest
 ENV HOME=/opt/zeppelin \
     MAVEN_VERSION=3.3.9 \
     JAVA_HOME=/usr/lib/jvm/java \
-    ZEPPELIN_VERSION=0.6.2 \
+    ZEPPELIN_VERSION=0.7.3 \
     ZEPPELIN_SERVER_HOME=/opt/zeppelin/server \
     ZEPPELIN_STORAGE_DIR=/opt/zeppelin/storage \
     ZEPPELIN_CONF_DIR=/opt/zeppelin/storage/conf \
